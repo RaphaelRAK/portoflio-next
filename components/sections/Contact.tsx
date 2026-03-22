@@ -3,6 +3,7 @@
 import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
 import { siteConfig } from "@/lib/metadata";
+import posthog from "posthog-js";
 
 export default function Contact() {
   const ref = useRef<HTMLElement>(null);
@@ -54,6 +55,7 @@ export default function Contact() {
             <a
               href={`mailto:${siteConfig.email}`}
               className="group inline-flex items-center gap-4"
+              onClick={() => posthog.capture("contact_email_clicked", { email: siteConfig.email })}
             >
               <span
                 className="font-display text-2xl md:text-3xl font-light text-[var(--color-text)] group-hover:text-[var(--color-accent)] transition-colors duration-300"
@@ -102,6 +104,7 @@ export default function Contact() {
                       rel="noopener noreferrer"
                       className="flex items-center justify-between group py-2"
                       style={{ borderBottom: "1px solid var(--color-border)" }}
+                      onClick={() => posthog.capture("contact_social_link_clicked", { platform: link.label.toLowerCase() })}
                     >
                       <span className="font-display text-base font-light text-[var(--color-text)] group-hover:text-[var(--color-accent)] transition-colors">
                         {link.label}
@@ -176,6 +179,7 @@ export default function Contact() {
               href="/CV_Raphael_Rakotonaivo.pdf"
               download
               className="group inline-flex items-center gap-3 border border-[var(--color-accent)] text-[var(--color-accent)] px-6 py-3 hover:bg-[var(--color-accent)] hover:text-[var(--color-bg)] transition-all duration-200 flex-shrink-0"
+              onClick={() => posthog.capture("cv_downloaded", { source: "contact_section" })}
             >
               <span className="section-label">Télécharger mon CV</span>
               <span className="transition-transform duration-200 group-hover:translate-y-0.5">↓</span>

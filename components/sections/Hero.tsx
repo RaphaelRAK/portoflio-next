@@ -4,6 +4,7 @@ import { motion, useAnimate } from "framer-motion";
 import Image from "next/image";
 import { useEffect } from "react";
 import { siteConfig } from "@/lib/metadata";
+import posthog from "posthog-js";
 import {
   SiReact, SiNextdotjs, SiNestjs, SiTypescript, SiPostgresql,
   SiSupabase, SiDocker, SiTailwindcss, SiFramer, SiStripe,
@@ -126,9 +127,11 @@ const item = {
 
 export default function Hero() {
   const scrollToContact = () => {
+    posthog.capture("hero_cta_clicked", { cta: "me_contacter" });
     document.querySelector("#contact")?.scrollIntoView({ behavior: "smooth" });
   };
   const scrollToExperience = () => {
+    posthog.capture("hero_cta_clicked", { cta: "mon_parcours" });
     document.querySelector("#experience")?.scrollIntoView({ behavior: "smooth" });
   };
 
@@ -227,6 +230,7 @@ export default function Hero() {
                 target="_blank"
                 rel="noopener noreferrer"
                 className="section-label text-[var(--color-text-muted)] hover:text-[var(--color-accent)] transition-colors"
+                onClick={() => posthog.capture("hero_social_link_clicked", { platform: "github" })}
               >
                 GitHub
               </a>
@@ -236,6 +240,7 @@ export default function Hero() {
                 target="_blank"
                 rel="noopener noreferrer"
                 className="section-label text-[var(--color-text-muted)] hover:text-[var(--color-accent)] transition-colors"
+                onClick={() => posthog.capture("hero_social_link_clicked", { platform: "gitlab" })}
               >
                 GitLab
               </a>
@@ -245,6 +250,7 @@ export default function Hero() {
                 target="_blank"
                 rel="noopener noreferrer"
                 className="section-label text-[var(--color-text-muted)] hover:text-[var(--color-accent)] transition-colors"
+                onClick={() => posthog.capture("hero_social_link_clicked", { platform: "linkedin" })}
               >
                 LinkedIn
               </a>

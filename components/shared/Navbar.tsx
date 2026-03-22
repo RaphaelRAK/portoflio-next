@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { siteConfig } from "@/lib/metadata";
+import posthog from "posthog-js";
 
 const navLinks = [
   { label: "Parcours", href: "#experience" },
@@ -99,6 +100,7 @@ export default function Navbar() {
               href={CV_PATH}
               download
               className="section-label text-[var(--color-text-muted)] hover:text-[var(--color-text)] transition-colors duration-200 flex items-center gap-1.5"
+              onClick={() => posthog.capture("cv_downloaded", { source: "navbar" })}
             >
               CV
               <span className="text-[10px] opacity-60">↓</span>
@@ -106,6 +108,7 @@ export default function Navbar() {
             <a
               href={`mailto:${siteConfig.email}`}
               className="section-label border border-[var(--color-accent)] text-[var(--color-accent)] px-4 py-2 hover:bg-[var(--color-accent)] hover:text-[var(--color-bg)] transition-all duration-200"
+              onClick={() => posthog.capture("nav_contact_clicked")}
             >
               Me contacter
             </a>
@@ -175,14 +178,14 @@ export default function Navbar() {
                   href={CV_PATH}
                   download
                   className="section-label text-[var(--color-text-muted)]"
-                  onClick={() => setMenuOpen(false)}
+                  onClick={() => { setMenuOpen(false); posthog.capture("cv_downloaded", { source: "mobile_menu" }); }}
                 >
                   Télécharger mon CV ↓
                 </a>
                 <a
                   href={`mailto:${siteConfig.email}`}
                   className="section-label text-[var(--color-accent)]"
-                  onClick={() => setMenuOpen(false)}
+                  onClick={() => { setMenuOpen(false); posthog.capture("nav_contact_clicked", { source: "mobile_menu" }); }}
                 >
                   {siteConfig.email}
                 </a>

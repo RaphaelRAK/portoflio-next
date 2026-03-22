@@ -5,6 +5,7 @@ import { useRef } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { projects } from "@/lib/projects";
+import posthog from "posthog-js";
 
 export default function Projects() {
   const ref = useRef<HTMLElement>(null);
@@ -53,7 +54,11 @@ function ProjectRow({
         ease: [0.25, 0.1, 0.25, 1],
       }}
     >
-      <Link href={`/projects/${project.slug}/`} className="block group">
+      <Link
+        href={`/projects/${project.slug}/`}
+        className="block group"
+        onClick={() => posthog.capture("project_clicked", { slug: project.slug, title: project.title })}
+      >
         <div
           className="grid grid-cols-1 md:grid-cols-12 gap-4 md:gap-8 items-start p-6 md:p-8 transition-colors duration-200 cursor-pointer"
           style={{ backgroundColor: "var(--color-surface)" }}

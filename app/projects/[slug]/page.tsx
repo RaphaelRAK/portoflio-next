@@ -3,6 +3,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { getAllSlugs, getProjectBySlug } from "@/lib/projects";
 import ProjectStack from "@/components/projects/ProjectStack";
+import ProjectExternalLink from "@/components/projects/ProjectExternalLink";
 import type { Metadata } from "next";
 
 interface Props {
@@ -142,10 +143,10 @@ export default async function ProjectPage({ params }: Props) {
         {project.links.live && (
           <div className="mb-16">
             <p className="section-label text-[var(--color-accent)] mb-6">Site web</p>
-            <a
+            <ProjectExternalLink
               href={project.links.live}
-              target="_blank"
-              rel="noopener noreferrer"
+              linkType="live_site"
+              projectSlug={slug}
               className="group block border border-[var(--color-border)] hover:border-[var(--color-accent)] transition-colors duration-300"
               style={{ backgroundColor: "var(--color-surface)" }}
             >
@@ -180,7 +181,7 @@ export default async function ProjectPage({ params }: Props) {
                   ↗
                 </span>
               </div>
-            </a>
+            </ProjectExternalLink>
           </div>
         )}
 
@@ -192,10 +193,10 @@ export default async function ProjectPage({ params }: Props) {
             </p>
             <div className="flex flex-wrap gap-4">
               {project.links.appStore && (
-                <a
+                <ProjectExternalLink
                   href={project.links.appStore}
-                  target="_blank"
-                  rel="noopener noreferrer"
+                  linkType="app_store"
+                  projectSlug={slug}
                   className="group flex items-center gap-4 border border-[var(--color-border)] hover:border-[var(--color-accent)] px-6 py-4 transition-all duration-200 min-w-48"
                   style={{ backgroundColor: "var(--color-surface)" }}
                 >
@@ -214,13 +215,13 @@ export default async function ProjectPage({ params }: Props) {
                       App Store
                     </p>
                   </div>
-                </a>
+                </ProjectExternalLink>
               )}
               {project.links.playStore && (
-                <a
+                <ProjectExternalLink
                   href={project.links.playStore}
-                  target="_blank"
-                  rel="noopener noreferrer"
+                  linkType="play_store"
+                  projectSlug={slug}
                   className="group flex items-center gap-4 border border-[var(--color-border)] hover:border-[var(--color-accent)] px-6 py-4 transition-all duration-200 min-w-48"
                   style={{ backgroundColor: "var(--color-surface)" }}
                 >
@@ -241,7 +242,7 @@ export default async function ProjectPage({ params }: Props) {
                       Google Play
                     </p>
                   </div>
-                </a>
+                </ProjectExternalLink>
               )}
             </div>
           </div>
@@ -253,24 +254,24 @@ export default async function ProjectPage({ params }: Props) {
             <p className="section-label text-[var(--color-accent)] mb-6">Code source</p>
             <div className="flex flex-wrap gap-4">
               {project.links.github && (
-                <a
+                <ProjectExternalLink
                   href={project.links.github}
-                  target="_blank"
-                  rel="noopener noreferrer"
+                  linkType="github"
+                  projectSlug={slug}
                   className="section-label border border-[var(--color-border)] text-[var(--color-text-muted)] px-6 py-3 hover:border-[var(--color-text)] hover:text-[var(--color-text)] transition-all duration-200"
                 >
                   GitHub →
-                </a>
+                </ProjectExternalLink>
               )}
               {project.links.gitlab && (
-                <a
+                <ProjectExternalLink
                   href={project.links.gitlab}
-                  target="_blank"
-                  rel="noopener noreferrer"
+                  linkType="gitlab"
+                  projectSlug={slug}
                   className="section-label border border-[var(--color-border)] text-[var(--color-text-muted)] px-6 py-3 hover:border-[var(--color-text)] hover:text-[var(--color-text)] transition-all duration-200"
                 >
                   GitLab →
-                </a>
+                </ProjectExternalLink>
               )}
             </div>
           </div>
