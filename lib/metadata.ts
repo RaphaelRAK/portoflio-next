@@ -58,6 +58,9 @@ export const baseMetadata: Metadata = {
     images: [`${siteConfig.url}/og-image.png`],
     creator: "@raphaelrakoto",
   },
+  verification: {
+    google: "o_QlIdkvF0xCIqByc3_HcfutUHMCI7HjxGcv3vpxOcI",
+  },
   robots: {
     index: true,
     follow: true,
