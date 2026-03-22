@@ -1,8 +1,85 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { motion, useAnimate } from "framer-motion";
 import Image from "next/image";
+import { useEffect } from "react";
 import { siteConfig } from "@/lib/metadata";
+
+// Delays (s): line1 starts at 0.5, each char 0.055s apart, lines chained
+const CHAR_SPEED = 0.055;
+const LINE1 = { text: "Aina", start: 0.5 };
+const LINE2 = { text: "Raphaël", start: LINE1.start + LINE1.text.length * CHAR_SPEED + 0.05 };
+const LINE3 = { text: "Rakotonaivo", start: LINE2.start + LINE2.text.length * CHAR_SPEED + 0.05 };
+const CURSOR_DELAY = LINE3.start + LINE3.text.length * CHAR_SPEED + 0.1;
+
+const charVariants = {
+  hidden: { opacity: 0 },
+  show: { opacity: 1, transition: { duration: 0.01 } },
+};
+
+function TypewriterLine({
+  text,
+  delayStart,
+  className,
+  style,
+}: {
+  text: string;
+  delayStart: number;
+  className?: string;
+  style?: React.CSSProperties;
+}) {
+  return (
+    <motion.span
+      className={className}
+      style={{ display: "block", ...style }}
+      initial="hidden"
+      animate="show"
+      variants={{
+        hidden: {},
+        show: { transition: { staggerChildren: CHAR_SPEED, delayChildren: delayStart } },
+      }}
+    >
+      {text.split("").map((char, i) => (
+        <motion.span key={i} variants={charVariants} style={{ display: "inline-block" }}>
+          {char}
+        </motion.span>
+      ))}
+    </motion.span>
+  );
+}
+
+function Cursor({ delay }: { delay: number }) {
+  const [scope, animate] = useAnimate();
+
+  useEffect(() => {
+    animate(
+      scope.current,
+      { opacity: [0, 0, 1] },
+      { duration: 0.1, delay, ease: "linear" }
+    ).then(() => {
+      animate(
+        scope.current,
+        { opacity: [1, 0] },
+        { duration: 0.6, repeat: Infinity, repeatType: "reverse", ease: "linear", delay: 0.4 }
+      );
+    });
+  }, [animate, delay, scope]);
+
+  return (
+    <span
+      ref={scope}
+      style={{
+        display: "inline-block",
+        width: "3px",
+        height: "0.85em",
+        backgroundColor: "var(--color-accent)",
+        marginLeft: "6px",
+        verticalAlign: "middle",
+        opacity: 0,
+      }}
+    />
+  );
+}
 
 const techMarqueeItems = [
   { name: "React Native", icon: "https://cdn.simpleicons.org/react" },
@@ -80,25 +157,34 @@ export default function Hero() {
               </span>
             </motion.div>
 
-            {/* Name — editorial large */}
-            <div className="overflow-hidden">
-              <motion.h1
-                variants={item}
+            {/* Name — typewriter */}
+            <div className="overflow-visible">
+              <h1
                 className="font-display font-light leading-[0.9] tracking-tight"
                 style={{ fontSize: "clamp(3.5rem, 9vw, 9rem)" }}
               >
-                <span className="block text-[var(--color-text)]">Aina</span>
-                <span className="block text-[var(--color-text)]">Raphaël</span>
-                <span
-                  className="block"
-                  style={{
-                    color: "transparent",
-                    WebkitTextStroke: "1px var(--color-accent)",
-                  }}
-                >
-                  Rakotonaivo
+                <TypewriterLine
+                  text={LINE1.text}
+                  delayStart={LINE1.start}
+                  className="text-[var(--color-text)]"
+                />
+                <TypewriterLine
+                  text={LINE2.text}
+                  delayStart={LINE2.start}
+                  className="text-[var(--color-text)]"
+                />
+                <span className="block" style={{ position: "relative" }}>
+                  <TypewriterLine
+                    text={LINE3.text}
+                    delayStart={LINE3.start}
+                    style={{
+                      color: "transparent",
+                      WebkitTextStroke: "1px var(--color-accent)",
+                    }}
+                  />
+                  <Cursor delay={CURSOR_DELAY} />
                 </span>
-              </motion.h1>
+              </h1>
             </div>
 
             {/* Title + accroche */}
