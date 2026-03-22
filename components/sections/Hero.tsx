@@ -4,6 +4,11 @@ import { motion, useAnimate } from "framer-motion";
 import Image from "next/image";
 import { useEffect } from "react";
 import { siteConfig } from "@/lib/metadata";
+import {
+  SiReact, SiNextdotjs, SiNestjs, SiTypescript, SiPostgresql,
+  SiSupabase, SiDocker, SiTailwindcss, SiFramer, SiStripe,
+  SiFirebase, SiN8N, SiScaleway, SiRedux,
+} from "react-icons/si";
 
 // Delays (s): line1 starts at 0.5, each char 0.055s apart, lines chained
 const CHAR_SPEED = 0.055;
@@ -81,23 +86,23 @@ function Cursor({ delay }: { delay: number }) {
   );
 }
 
-const techMarqueeItems = [
-  { name: "React Native", icon: "https://cdn.simpleicons.org/react" },
-  { name: "Next.js", icon: "https://cdn.simpleicons.org/nextdotjs" },
-  { name: "NestJS", icon: "https://cdn.simpleicons.org/nestjs" },
-  { name: "TypeScript", icon: "https://cdn.simpleicons.org/typescript" },
-  { name: "PostgreSQL", icon: "https://cdn.simpleicons.org/postgresql" },
-  { name: "Supabase", icon: "https://cdn.simpleicons.org/supabase" },
-  { name: "Docker", icon: "https://cdn.simpleicons.org/docker" },
-  { name: "Tailwind CSS", icon: "https://cdn.simpleicons.org/tailwindcss" },
-  { name: "Framer Motion", icon: "https://cdn.simpleicons.org/framer" },
-  { name: "Stripe", icon: "https://cdn.simpleicons.org/stripe" },
-  { name: "Firebase", icon: "https://cdn.simpleicons.org/firebase" },
-  { name: "n8n", icon: "https://cdn.simpleicons.org/n8n" },
-  { name: "Scaleway", icon: "https://cdn.simpleicons.org/scaleway" },
-  { name: "Redux Toolkit", icon: "https://cdn.simpleicons.org/redux" },
-  { name: "React Query", icon: "https://cdn.simpleicons.org/reactquery" },
-  { name: "Python", icon: "https://cdn.simpleicons.org/python" },
+import type { IconType } from "react-icons";
+
+const techMarqueeItems: { name: string; Icon: IconType }[] = [
+  { name: "React Native", Icon: SiReact },
+  { name: "Next.js", Icon: SiNextdotjs },
+  { name: "NestJS", Icon: SiNestjs },
+  { name: "TypeScript", Icon: SiTypescript },
+  { name: "PostgreSQL", Icon: SiPostgresql },
+  { name: "Supabase", Icon: SiSupabase },
+  { name: "Docker", Icon: SiDocker },
+  { name: "Tailwind CSS", Icon: SiTailwindcss },
+  { name: "Framer Motion", Icon: SiFramer },
+  { name: "Stripe", Icon: SiStripe },
+  { name: "Firebase", Icon: SiFirebase },
+  { name: "n8n", Icon: SiN8N },
+  { name: "Scaleway", Icon: SiScaleway },
+  { name: "Redux Toolkit", Icon: SiRedux },
 ];
 
 const techMarquee = [...techMarqueeItems, ...techMarqueeItems];
@@ -290,14 +295,7 @@ export default function Hero() {
                 key={i}
                 className="section-label text-[var(--color-text-muted)] flex items-center gap-2"
               >
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
-                  src={tech.icon}
-                  alt=""
-                  width={16}
-                  height={16}
-                  className="w-4 h-4 opacity-60"
-                />
+                <tech.Icon size={14} className="opacity-60 flex-shrink-0" />
                 {tech.name}
                 <span className="text-[var(--color-accent)]">·</span>
               </span>

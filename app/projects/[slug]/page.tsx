@@ -1,5 +1,6 @@
 import { notFound } from "next/navigation";
 import Link from "next/link";
+import Image from "next/image";
 import { getAllSlugs, getProjectBySlug } from "@/lib/projects";
 import ProjectStack from "@/components/projects/ProjectStack";
 import type { Metadata } from "next";
@@ -94,6 +95,30 @@ export default async function ProjectPage({ params }: Props) {
             {project.longDesc}
           </p>
         </div>
+
+        {/* Screenshots */}
+        {project.images && project.images.length > 0 && (
+          <div className="mb-16">
+            <p className="section-label text-[var(--color-accent)] mb-6">Aperçu</p>
+            <div className="flex gap-4 overflow-x-auto pb-4" style={{ scrollSnapType: "x mandatory" }}>
+              {project.images.map((src, i) => (
+                <div
+                  key={i}
+                  className="flex-shrink-0 relative overflow-hidden border border-[var(--color-border)]"
+                  style={{ width: 200, height: 432, scrollSnapAlign: "start" }}
+                >
+                  <Image
+                    src={src}
+                    alt={`${project.title} — écran ${i + 1}`}
+                    fill
+                    className="object-cover"
+                    sizes="200px"
+                  />
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
 
         {/* Stack */}
         <div className="mb-16">

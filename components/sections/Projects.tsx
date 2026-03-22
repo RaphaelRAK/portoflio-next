@@ -3,6 +3,7 @@
 import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { projects } from "@/lib/projects";
 
 export default function Projects() {
@@ -89,7 +90,19 @@ function ProjectRow({
           </div>
 
           <div className="md:col-span-2 flex flex-col items-start md:items-end gap-3">
-            <p className="section-label text-[var(--color-text-muted)]">{project.period}</p>
+            {project.images?.[0] ? (
+              <div className="relative w-16 h-12 overflow-hidden border border-[var(--color-border)] opacity-60 group-hover:opacity-100 transition-opacity duration-300 flex-shrink-0">
+                <Image
+                  src={project.images[0]}
+                  alt=""
+                  fill
+                  className="object-cover"
+                  sizes="64px"
+                />
+              </div>
+            ) : (
+              <p className="section-label text-[var(--color-text-muted)]">{project.period}</p>
+            )}
             <div className="flex items-center gap-1 section-label text-[var(--color-accent)] group-hover:gap-2 transition-all duration-200">
               Voir
               <span>→</span>

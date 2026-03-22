@@ -66,6 +66,7 @@ export default function Contact() {
                 →
               </span>
             </a>
+
           </motion.div>
 
           {/* Right — Info */}
@@ -115,6 +116,72 @@ export default function Contact() {
             </div>
           </motion.div>
         </div>
+
+        {/* CV Preview */}
+        <motion.div
+          initial={{ opacity: 0, y: 40 }}
+          animate={inView ? { opacity: 1, y: 0 } : {}}
+          transition={{ delay: 0.4, duration: 0.7, ease: [0.25, 0.1, 0.25, 1] }}
+          className="mt-20 pt-16 border-t border-[var(--color-border)]"
+        >
+          <p className="section-label text-[var(--color-accent)] mb-8">Mon CV</p>
+
+          {/* Document frame */}
+          <div
+            className="border border-[var(--color-border)]"
+            style={{ backgroundColor: "var(--color-surface)" }}
+          >
+            {/* Browser-chrome bar */}
+            <div
+              className="flex items-center gap-3 px-4 py-3 border-b border-[var(--color-border)]"
+              style={{ backgroundColor: "var(--color-surface-2)" }}
+            >
+              <span className="flex gap-1.5">
+                <span className="w-2.5 h-2.5 rounded-full bg-[var(--color-border)]" />
+                <span className="w-2.5 h-2.5 rounded-full bg-[var(--color-border)]" />
+                <span className="w-2.5 h-2.5 rounded-full bg-[var(--color-border)]" />
+              </span>
+              <span
+                className="flex-1 text-center section-label text-[var(--color-text-muted)] px-4 py-1 rounded-sm text-xs"
+                style={{ backgroundColor: "var(--color-bg)" }}
+              >
+                CV_Raphael_Rakotonaivo.pdf
+              </span>
+            </div>
+
+            {/* PDF embed — desktop */}
+            <iframe
+              src="/CV_Raphael_Rakotonaivo.pdf"
+              title="CV Aina Raphaël Rakotonaivo"
+              className="w-full hidden md:block"
+              style={{ height: 720, border: "none" }}
+            />
+
+            {/* Mobile fallback */}
+            <div className="md:hidden flex flex-col items-center justify-center gap-3 py-16 px-6">
+              <span className="font-display text-4xl font-light text-[var(--color-border)]">PDF</span>
+              <p className="section-label text-[var(--color-text-muted)] text-center">
+                Prévisualisation disponible sur desktop
+              </p>
+            </div>
+          </div>
+
+          {/* Download CTA */}
+          <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mt-6">
+            <p className="text-[var(--color-text-muted)] text-sm leading-relaxed max-w-sm">
+              Toutes mes expériences, formations et compétences en un seul document —
+              mis à jour en 2025.
+            </p>
+            <a
+              href="/CV_Raphael_Rakotonaivo.pdf"
+              download
+              className="group inline-flex items-center gap-3 border border-[var(--color-accent)] text-[var(--color-accent)] px-6 py-3 hover:bg-[var(--color-accent)] hover:text-[var(--color-bg)] transition-all duration-200 flex-shrink-0"
+            >
+              <span className="section-label">Télécharger mon CV</span>
+              <span className="transition-transform duration-200 group-hover:translate-y-0.5">↓</span>
+            </a>
+          </div>
+        </motion.div>
       </div>
     </section>
   );

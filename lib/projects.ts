@@ -14,6 +14,7 @@ export interface Project {
     appStore?: string;
     playStore?: string;
   };
+  images?: string[];
   featured: boolean;
 }
 
@@ -49,6 +50,13 @@ export const projects: Project[] = [
         "https://play.google.com/store/apps/details?id=com.plumservices.plum.prod&hl=fr",
       appStore: "https://apps.apple.com/fr/app/pl%C3%BCm-services/id6751805941",
     },
+    images: [
+      "/images/plum/plum-0.png",
+      "/images/plum/plum-1.png",
+      "/images/plum/plum-2.png",
+      "/images/plum/plum-3.png",
+      "/images/plum/plum-4.png",
+    ],
     featured: true,
   },
   {

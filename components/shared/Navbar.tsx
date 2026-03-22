@@ -11,14 +11,33 @@ const navLinks = [
   { label: "Contact", href: "#contact" },
 ];
 
+const CV_PATH = "/CV_Raphael_Rakotonaivo.pdf";
+
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
+  const [activeSection, setActiveSection] = useState<string>("");
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 40);
     window.addEventListener("scroll", onScroll);
     return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
+  useEffect(() => {
+    const ids = navLinks.map((l) => l.href.slice(1));
+    const observers: IntersectionObserver[] = [];
+    ids.forEach((id) => {
+      const el = document.getElementById(id);
+      if (!el) return;
+      const obs = new IntersectionObserver(
+        ([entry]) => { if (entry.isIntersecting) setActiveSection(id); },
+        { threshold: 0.25 }
+      );
+      obs.observe(el);
+      observers.push(obs);
+    });
+    return () => observers.forEach((o) => o.disconnect());
   }, []);
 
   const handleNav = (href: string) => {
@@ -52,25 +71,45 @@ export default function Navbar() {
 
           {/* Desktop nav */}
           <ul className="hidden md:flex items-center gap-8">
-            {navLinks.map((link) => (
-              <li key={link.href}>
-                <button
-                  onClick={() => handleNav(link.href)}
-                  className="section-label hover:text-[var(--color-text)] transition-colors duration-200 cursor-pointer"
-                >
-                  {link.label}
-                </button>
-              </li>
-            ))}
+            {navLinks.map((link) => {
+              const isActive = activeSection === link.href.slice(1);
+              return (
+                <li key={link.href}>
+                  <button
+                    onClick={() => handleNav(link.href)}
+                    className="section-label transition-colors duration-200 cursor-pointer relative"
+                    style={{ color: isActive ? "var(--color-text)" : "var(--color-text-muted)" }}
+                  >
+                    {link.label}
+                    {isActive && (
+                      <motion.span
+                        layoutId="nav-active"
+                        className="absolute -bottom-1 left-0 right-0 h-px bg-[var(--color-accent)]"
+                      />
+                    )}
+                  </button>
+                </li>
+              );
+            })}
           </ul>
 
-          {/* CTA desktop */}
-          <a
-            href={`mailto:${siteConfig.email}`}
-            className="hidden md:block section-label border border-[var(--color-accent)] text-[var(--color-accent)] px-4 py-2 hover:bg-[var(--color-accent)] hover:text-[var(--color-bg)] transition-all duration-200"
-          >
-            Me contacter
-          </a>
+          {/* Right actions desktop */}
+          <div className="hidden md:flex items-center gap-3">
+            <a
+              href={CV_PATH}
+              download
+              className="section-label text-[var(--color-text-muted)] hover:text-[var(--color-text)] transition-colors duration-200 flex items-center gap-1.5"
+            >
+              CV
+              <span className="text-[10px] opacity-60">↓</span>
+            </a>
+            <a
+              href={`mailto:${siteConfig.email}`}
+              className="section-label border border-[var(--color-accent)] text-[var(--color-accent)] px-4 py-2 hover:bg-[var(--color-accent)] hover:text-[var(--color-bg)] transition-all duration-200"
+            >
+              Me contacter
+            </a>
+          </div>
 
           {/* Hamburger mobile */}
           <button
@@ -115,7 +154,12 @@ export default function Navbar() {
                 >
                   <button
                     onClick={() => handleNav(link.href)}
-                    className="font-display text-5xl font-light text-[var(--color-text)] hover:text-[var(--color-accent)] transition-colors duration-200 cursor-pointer"
+                    className="font-display text-5xl font-light transition-colors duration-200 cursor-pointer"
+                    style={{
+                      color: activeSection === link.href.slice(1)
+                        ? "var(--color-accent)"
+                        : "var(--color-text)",
+                    }}
                   >
                     {link.label}
                   </button>
@@ -125,7 +169,16 @@ export default function Navbar() {
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ delay: 0.4 }}
+                className="flex flex-col items-center gap-4"
               >
+                <a
+                  href={CV_PATH}
+                  download
+                  className="section-label text-[var(--color-text-muted)]"
+                  onClick={() => setMenuOpen(false)}
+                >
+                  Télécharger mon CV ↓
+                </a>
                 <a
                   href={`mailto:${siteConfig.email}`}
                   className="section-label text-[var(--color-accent)]"

@@ -180,7 +180,7 @@ export default function Experience() {
               <div className="space-y-3">
                 {[
                   { lang: "Français", level: "Courant" },
-                  { lang: "Anglais", level: "Académique" },
+                  { lang: "Anglais", level: "Professionnel" },
                   { lang: "Malagasy", level: "Courant" },
                 ].map((l) => (
                   <div key={l.lang} className="flex items-center justify-between">
