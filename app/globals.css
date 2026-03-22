@@ -1,0 +1,119 @@
+@import "tailwindcss";
+
+@theme {
+  /* === PALETTE === */
+  --color-bg: #09090b;
+  --color-surface: #111113;
+  --color-surface-2: #1a1a1d;
+  --color-border: #2a2a2f;
+  --color-text: #fafaf5;
+  --color-text-muted: #888880;
+  --color-accent: #c9a84c;
+  --color-accent-dim: #7d6930;
+
+  /* === TYPOGRAPHY === */
+  --font-display: var(--font-cormorant);
+  --font-body: var(--font-dmsans);
+
+  /* === SPACING === */
+  --section-padding: clamp(5rem, 10vw, 10rem);
+}
+
+@layer base {
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    font-size: 16px;
+  }
+
+  body {
+    background-color: var(--color-bg);
+    color: var(--color-text);
+    font-family: var(--font-body), sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    overflow-x: hidden;
+  }
+
+  ::selection {
+    background-color: var(--color-accent);
+    color: var(--color-bg);
+  }
+
+  /* Scrollbar styling */
+  ::-webkit-scrollbar {
+    width: 4px;
+  }
+  ::-webkit-scrollbar-track {
+    background: var(--color-bg);
+  }
+  ::-webkit-scrollbar-thumb {
+    background: var(--color-border);
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: var(--color-accent-dim);
+  }
+}
+
+@layer utilities {
+  .font-display {
+    font-family: var(--font-display), Georgia, serif;
+  }
+
+  .text-accent {
+    color: var(--color-accent);
+  }
+
+  .bg-surface {
+    background-color: var(--color-surface);
+  }
+
+  .border-subtle {
+    border-color: var(--color-border);
+  }
+
+  .text-muted {
+    color: var(--color-text-muted);
+  }
+
+  /* Editorial rule line */
+  .rule-line {
+    display: block;
+    width: 100%;
+    height: 1px;
+    background-color: var(--color-border);
+  }
+
+  /* Section label style */
+  .section-label {
+    font-family: var(--font-body), sans-serif;
+    font-size: 0.65rem;
+    font-weight: 500;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--color-accent);
+  }
+
+  /* Marquee animation */
+  .marquee-track {
+    display: flex;
+    gap: 3rem;
+    animation: marquee 30s linear infinite;
+    white-space: nowrap;
+  }
+
+  @keyframes marquee {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+  }
+
+  /* Photo treatment */
+  .photo-treatment {
+    filter: grayscale(30%) contrast(1.05);
+  }
+}
