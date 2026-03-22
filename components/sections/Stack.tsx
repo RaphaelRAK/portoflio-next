@@ -89,8 +89,8 @@ const categories = [
       { name: "React", level: "Expert" },
       { name: "TypeScript", level: "Expert" },
       { name: "Tailwind CSS", level: "Expert" },
-      { name: "Redux Toolkit", level: "Avancé" },
-      { name: "React Query", level: "Avancé" },
+      { name: "Redux Toolkit", level: "Intermédiaire" },
+      { name: "React Query", level: "Intermédiaire" },
     ],
   },
   {
@@ -98,8 +98,8 @@ const categories = [
     techs: [
       { name: "NestJS", level: "Expert" },
       { name: "REST API", level: "Expert" },
-      { name: "PostgreSQL", level: "Avancé" },
-      { name: "Supabase", level: "Avancé" },
+      { name: "PostgreSQL", level: "Intermédiaire" },
+      { name: "Supabase", level: "Expert" },
       { name: "Python", level: "Intermédiaire" },
       { name: "Laravel", level: "Intermédiaire" },
     ],
@@ -109,10 +109,10 @@ const categories = [
     techs: [
       { name: "Docker", level: "Avancé" },
       { name: "Docker Compose", level: "Avancé" },
-      { name: "Nginx", level: "Avancé" },
+      { name: "Nginx", level: "Intermédiaire" },
       { name: "Scaleway", level: "Avancé" },
       { name: "GitHub Actions", level: "Intermédiaire" },
-      { name: "Serveur dédié", level: "Avancé" },
+      { name: "Serveur dédié", level: "Intermédiaire" },
     ],
   },
   {
@@ -130,7 +130,7 @@ const categories = [
   {
     label: "Divers",
     techs: [
-      { name: "JavaScript", level: "Expert" },
+      { name: "JavaScript", level: "Intermédiaire" },
       { name: "Java", level: "Intermédiaire" },
       { name: "C", level: "Intermédiaire" },
       { name: "Bash", level: "Intermédiaire" },

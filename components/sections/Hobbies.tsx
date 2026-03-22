@@ -61,29 +61,30 @@ export default function Hobbies() {
                 animate={inView ? { opacity: 1, y: 0 } : {}}
                 transition={{ delay: i * 0.1, duration: 0.6, ease: [0.25, 0.1, 0.25, 1] }}
                 className="group relative overflow-hidden"
-                style={{ backgroundColor: "var(--color-bg)", minHeight: 280 }}
+                style={{ backgroundColor: "var(--color-bg)", minHeight: 320 }}
               >
                 {/* Background image */}
-                <div className="absolute inset-0 transition-transform duration-500 group-hover:scale-105">
+                <div className="absolute inset-0 transition-transform duration-700 group-hover:scale-105">
                   <Image
                     src={hobby.image}
                     alt={hobby.title}
                     fill
-                    className="object-cover opacity-30 group-hover:opacity-40 transition-opacity duration-500"
+                    className="object-contain object-center opacity-70 group-hover:opacity-90 transition-opacity duration-500"
+                    style={{ paddingBottom: "6rem", paddingTop: "1rem" }}
                     sizes="(max-width: 768px) 100vw, 25vw"
                   />
                 </div>
 
-                {/* Gradient overlay */}
+                {/* Gradient overlay — only bottom third so image stays visible */}
                 <div
                   className="absolute inset-0"
                   style={{
-                    background: "linear-gradient(to top, var(--color-bg) 40%, transparent 100%)",
+                    background: "linear-gradient(to top, var(--color-bg) 32%, rgba(0,0,0,0.15) 65%, transparent 100%)",
                   }}
                 />
 
                 {/* Content */}
-                <div className="relative h-full flex flex-col justify-end p-6" style={{ minHeight: 280 }}>
+                <div className="relative h-full flex flex-col justify-end p-6" style={{ minHeight: 320 }}>
                   {/* Gold accent line */}
                   <div
                     className="w-8 h-0.5 mb-4 transition-all duration-300 group-hover:w-12"

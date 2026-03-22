@@ -87,16 +87,6 @@ export default function Contact() {
               </div>
 
               <div>
-                <p className="section-label text-[var(--color-accent)] mb-3">Téléphone</p>
-                <a
-                  href={`tel:${siteConfig.phone}`}
-                  className="font-display text-xl font-light text-[var(--color-text)] hover:text-[var(--color-accent)] transition-colors"
-                >
-                  {siteConfig.phone}
-                </a>
-              </div>
-
-              <div>
                 <p className="section-label text-[var(--color-accent)] mb-4">Réseaux</p>
                 <div className="space-y-3">
                   {[

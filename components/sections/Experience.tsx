@@ -58,8 +58,8 @@ const education = [
     mention: "Mention Bien",
   },
   {
-    degree: "Baccalauréat Scientifique Série C",
-    school: "",
+    degree: "Baccalauréat Scientifique Série C (Madagascar)",
+    school: "Lycée Notre Dame Majunga ",
     period: "2017",
     mention: "Mention Bien",
   },

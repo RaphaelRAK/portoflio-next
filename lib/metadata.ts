@@ -7,7 +7,6 @@ export const siteConfig = {
     "Développeur Fullstack React Native & Next.js basé à La Réunion. CDI chez plüm. Ouvert aux opportunités en remote, Paris, Lyon, Toulouse.",
   url: "https://raphael-rakotonaivo.vercel.app",
   email: "raphael.rakotonaivo@gmail.com",
-  phone: "0692828074",
   location: "La Réunion",
   github: "https://github.com/raphael137",
   gitlab: "https://gitlab.com/raphael137",
