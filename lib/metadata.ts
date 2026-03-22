@@ -2,21 +2,46 @@ import type { Metadata } from "next";
 
 export const siteConfig = {
   name: "Aina Raphaël Rakotonaivo",
-  title: "Aina Raphaël Rakotonaivo — Développeur Fullstack",
+  title: "Aina Raphaël Rakotonaivo — Développeur Fullstack React Native & Next.js",
   description:
-    "Développeur Fullstack React Native & Next.js basé à La Réunion. CDI chez plüm. Ouvert aux opportunités en remote, Paris, Lyon, Toulouse.",
-  url: "https://raphael-rakotonaivo.vercel.app",
+    "Développeur Fullstack spécialisé React Native, Next.js et NestJS, basé à La Réunion. Master 2 Informatique, CDI chez plüm. Disponible en remote — Paris, Lyon, Toulouse.",
+  url: "https://raphael-dev.vercel.app",
   email: "raphael.rakotonaivo@gmail.com",
   location: "La Réunion",
   github: "https://github.com/raphael137",
   gitlab: "https://gitlab.com/raphael137",
   linkedin: "https://www.linkedin.com/in/aina-rapha%C3%ABl-rakotonaivo-80a821189/",
+  keywords: [
+    "développeur fullstack",
+    "développeur React Native",
+    "développeur Next.js",
+    "développeur La Réunion",
+    "développeur mobile",
+    "NestJS",
+    "TypeScript",
+    "PostgreSQL",
+    "Docker",
+    "développeur remote",
+    "Aina Raphaël Rakotonaivo",
+    "portfolio développeur",
+    "développeur fullstack La Réunion",
+    "React Native La Réunion",
+  ],
 };
 
 export const baseMetadata: Metadata = {
-  title: siteConfig.title,
+  title: {
+    default: siteConfig.title,
+    template: "%s — Aina Raphaël Rakotonaivo",
+  },
   description: siteConfig.description,
+  keywords: siteConfig.keywords,
+  authors: [{ name: siteConfig.name, url: siteConfig.url }],
+  creator: siteConfig.name,
   metadataBase: new URL(siteConfig.url),
+  alternates: {
+    canonical: siteConfig.url,
+  },
   openGraph: {
     title: siteConfig.title,
     description: siteConfig.description,
@@ -31,9 +56,17 @@ export const baseMetadata: Metadata = {
     title: siteConfig.title,
     description: siteConfig.description,
     images: [`${siteConfig.url}/og-image.png`],
+    creator: "@raphaelrakoto",
   },
   robots: {
     index: true,
     follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+    },
   },
 };

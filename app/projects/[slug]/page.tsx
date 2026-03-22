@@ -17,9 +17,21 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
   const project = getProjectBySlug(slug);
   if (!project) return {};
+  const url = `https://raphael-dev.vercel.app/projects/${slug}/`;
   return {
-    title: `${project.title} — Aina Raphaël Rakotonaivo`,
+    title: project.title,
     description: project.shortDesc,
+    keywords: project.stack,
+    alternates: { canonical: url },
+    openGraph: {
+      title: `${project.title} — Aina Raphaël Rakotonaivo`,
+      description: project.shortDesc,
+      url,
+      type: "article",
+      images: project.images?.[0]
+        ? [{ url: `https://raphael-dev.vercel.app${project.images[0]}`, width: 800, height: 600, alt: project.title }]
+        : [{ url: "https://raphael-dev.vercel.app/og-image.png", width: 1200, height: 630, alt: project.title }],
+    },
   };
 }
 
