@@ -113,6 +113,13 @@ export default async function ProjectPage({ params }: Props) {
         {project.images && project.images.length > 0 && (
           <div className="mb-16">
             <p className="section-label text-[var(--color-accent)] mb-6">Aperçu</p>
+            {project.previewNotice && (
+              <div className="mb-4 rounded-md border border-[var(--color-accent)]/30 bg-[var(--color-surface)] px-4 py-3">
+                <p className="text-sm text-[var(--color-text-muted)]">
+                  {project.previewNotice}
+                </p>
+              </div>
+            )}
             <div className="flex gap-4 overflow-x-auto pb-4" style={{ scrollSnapType: "x mandatory" }}>
               {project.images.map((src, i) => (
                 <div

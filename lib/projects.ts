@@ -15,6 +15,7 @@ export interface Project {
     playStore?: string;
   };
   images?: string[];
+  previewNotice?: string;
   featured: boolean;
 }
 
@@ -71,6 +72,9 @@ export const projects: Project[] = [
     context: "TER — LIM, Université de La Réunion",
     role: "Développeur",
     links: {},
+    images: ["/images/ter-preview.svg"],
+    previewNotice:
+      "Aperçu généré à partir du projet réel. La plateforme est réservée à un usage interne universitaire.",
     featured: true,
   },
   {
@@ -85,6 +89,9 @@ export const projects: Project[] = [
     context: "TER — LIM, Université de La Réunion",
     role: "Développeur",
     links: {},
+    images: ["/images/maido-preview.svg"],
+    previewNotice:
+      "Aperçu généré à partir du projet réel. Le prototype complet n'est pas accessible publiquement.",
     featured: false,
   },
   {
@@ -99,6 +106,9 @@ export const projects: Project[] = [
     context: "Stage — ESIGE Madagascar",
     role: "Développeur web stagiaire",
     links: {},
+    images: ["/images/esige-preview.svg"],
+    previewNotice:
+      "Aperçu généré à partir du projet réel. L'application est destinée à un usage interne.",
     featured: false,
   },
 ];
